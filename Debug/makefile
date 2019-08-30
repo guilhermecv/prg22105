@@ -23,19 +23,19 @@ endif
 # Add inputs and outputs from these tool invocations to the build variables 
 
 # All Target
-all: lista_encadeada
+all: prog2
 
 # Tool invocations
-lista_encadeada: $(OBJS) $(USER_OBJS)
+prog2: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: Cross GCC Linker'
-	gcc  -o "lista_encadeada" $(OBJS) $(USER_OBJS) $(LIBS)
+	gcc  -o "prog2" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(EXECUTABLES)$(OBJS)$(C_DEPS) lista_encadeada
+	-$(RM) $(EXECUTABLES)$(OBJS)$(C_DEPS) prog2
 	-@echo ' '
 
 .PHONY: all clean dependents

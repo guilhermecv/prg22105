@@ -14,6 +14,7 @@
 #include "no.h"
 
 void imprimi_lista(lista_enc_t* lista);
+void imprimi_cabeca(lista_enc_t* lista);
 
 int main()
 {
@@ -26,18 +27,21 @@ int main()
 
     lista = criar_lista_enc();
 
+    elemento = criar_no((void*)nome_3);
+    add_cabeca(lista, elemento);
+
+    elemento = criar_no((void*)nome_2);
+    add_cabeca(lista, elemento);
+
     elemento = criar_no((void*)nome_1);
     add_cabeca(lista, elemento);
-/*
-    elemento = criar_no((void*)nome_2);
-    add_cauda(lista, elemento);
 
-    elemento = criar_no((void*)"Engenharia Eletronica");
-    add_cauda(lista, elemento);
-*/
     // Impressão da lista: deve-se colocar no módulo correto, neste caso o main
     imprimi_lista(lista);
 
+    printf("\n\nTamanho da lista: %d", tamanho(lista));
+
+    imprimi_cabeca(lista);
 
     return 0;
 }
@@ -50,4 +54,10 @@ void imprimi_lista(lista_enc_t* lista){
         printf("\nConteudo: %s", obter_dado(meu_no));
         meu_no = obter_proximo(meu_no);
     }
+}
+
+void imprimi_cabeca(lista_enc_t* lista)
+{
+	no_t *meu_no = obter_cabeca(lista);
+	printf("\nCabeca: %s\n", obter_dado(meu_no));
 }

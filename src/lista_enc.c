@@ -52,11 +52,9 @@ no_t *obter_cabeca(lista_enc_t *lista){
  */
 int tamanho(lista_enc_t *lista)
 {
-	int tam;
-
-	VERBOSE_MSG(("Tamanho da lista: %d\n", tam));
-	return tam;
+	return lista->tamanho;
 }
+
 /**
  * @brief Adiciona a cabeça à lista
  * @param lista: lista encadeada que se deseja adicionar
@@ -65,7 +63,7 @@ int tamanho(lista_enc_t *lista)
 void add_cabeca(lista_enc_t *lista, no_t* elemento)
 {
 #ifdef DEBUG
-	printf("Add. Cabeca\nPrimeiro elemento %p\n", elemento);
+	printf("\n[ADD. CABECA] Primeiro elemento %p. ", elemento);
 #endif
 
 	if(lista == NULL || elemento == NULL)
@@ -74,11 +72,23 @@ void add_cabeca(lista_enc_t *lista, no_t* elemento)
 		exit(EXIT_FAILURE);
 	}
 
-	lista->cabeca = elemento;
-	lista->tamanho++;
+	if(lista->tamanho == 0)
+	{
+		lista->cauda = elemento;
+		lista->cabeca = elemento;
+        lista->tamanho++;
+        desligar_no(elemento);
 
-	ligar_nos(lista->cauda, elemento);
-
+	}
+	else
+	{
+#ifdef DEBUG
+		printf("Atualizando cabeca");
+#endif
+		ligar_nos(elemento, lista->cabeca);
+		lista->cabeca = elemento;
+		lista->tamanho++;
+	}
 }
 
 /**

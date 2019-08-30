@@ -1,14 +1,6 @@
 #ifndef NO_H_INCLUDED
 #define NO_H_INCLUDED
 
-#define VERBOSE_ON
-
-#ifdef VERBOSE_ON
-#define VERBOSE_MSG(x)	printf(x);
-#else
-#define VERBOSE_MSG(x)
-#endif
-
 typedef struct nos no_t;
 
 /**
