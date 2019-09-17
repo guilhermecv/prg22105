@@ -10,11 +10,7 @@
 
 #include "dados.h"
 
-struct dados {
-    int amostra;        /*!< Identificador numérido da amostra */
-    float temperatura;  /*!< Valor do dado: temperatura */
-    char tempo[64];      /*!< Time stamp */
-};
+
 
 /**
   * @brief  Cria um novo dado
@@ -94,6 +90,8 @@ dado_t **ler_dados_csv(char *nome_do_arquivo, int *n_linhas){
     }
 
     *n_linhas = n_linhas_temp;	// Atualiza a quantidade de linhas
+
+    fclose(fp);
 
     return dados;
 }

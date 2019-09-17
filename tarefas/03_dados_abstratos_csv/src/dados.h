@@ -2,9 +2,15 @@
 #define DADO_H_INCLUDED
 
 /* Criação de tipo abstrato dado_t */
+struct dados {
+    int amostra;        /*!< Identificador numérido da amostra */
+    float temperatura;  /*!< Valor do dado: temperatura */
+    char tempo[64];      /*!< Time stamp */
+};
+
 typedef struct dados dado_t;
 
-#define DEBUG_ON
+// #define DEBUG_ON
 
 /**
   * @brief  Cria um novo dado
