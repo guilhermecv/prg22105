@@ -10,7 +10,7 @@
 
 #define TRUE 1
 #define FALSE 0
-#define MAX_VERTICES  3
+#define MAX_VERTICES  20
 
 typedef struct vertices vertice_t;
 typedef struct arestas aresta_t;
