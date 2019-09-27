@@ -1,20 +1,20 @@
 /*
- ============================================================================
- Name        : grafos-adj-matrix.c
- Author      : Renan Augusto Starke
- Version     :
- Copyright   : Renan, todo os direitos reservados
- Description : grafos com matriz de adjacencia, Ansi-style
- ============================================================================
- */
+============================================================================
+Name        : grafos-adj-matrix.c
+Author      : Renan Augusto Starke
+Version     :
+Copyright   : Renan, todo os direitos reservados
+Description : grafos com matriz de adjacencia, Ansi-style
+============================================================================
+*/
 
 /*>> Aula 8 - Busca em grafos: matriz de adjacencias
 
-	TO-DO:
-		[x] Criação da matriz de adjacencias
-		[ ] Extração para DOT
-		[ ] Busca em largura
-		[ ] Busca em profundidade
+TO-DO:
+[x] Criação da matriz de adjacencias
+[x] Extração para DOT
+[ ] Busca em largura
+[ ] Busca em profundidade
 */
 
 #include <stdio.h>
@@ -28,7 +28,7 @@ int main(void) {
 	int i,j;
 	grafo_t *g;
 
-  /* Cria grafo com 5 vértices */
+	/* Cria grafo com 5 vértices */
 	g = cria_grafo(VERTICES);
 
 	/* Cria as adjacencias */
@@ -46,13 +46,33 @@ int main(void) {
 	/* Imprime matriz */
 	for (i=0; i < VERTICES; i++){
 		for (j=0; j < VERTICES; j++)
-			printf("[%d] [%d] : %d\n", i,j, adjacente(g,i,j));
+		printf("[%d] [%d] : %d\n", i,j, adjacente(g,i,j));
 	}
 
 	/* Exporta para DOT */
+	FILE *fp;
+	fp = fopen("graph.dot", "w");
 
+	if(fp == NULL)
+	{
+		perror("dot_export");
+		exit(EXIT_FAILURE);
+	}
+
+	fprintf(fp, "graph {\n");	// Cria o cabeçalho do arquivo
+
+	for (i=0; i < VERTICES; i++){
+		for (j=0; j < VERTICES; j++)
+		if(adjacente(g, i, j))
+			fprintf(fp, "\t%d -- %d\n", i, j);
+	}
+
+	fprintf(fp, "}");
+	fclose(fp);
 
 	/* Busca em largura*/
+
+
 	libera_grafo(g);
 
 	return EXIT_SUCCESS;
