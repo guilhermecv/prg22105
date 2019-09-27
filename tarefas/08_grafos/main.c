@@ -24,6 +24,8 @@ TO-DO:
 
 #define VERTICES		5
 
+void dot_export(grafo_t *g);
+
 int main(void) {
 	int i,j;
 	grafo_t *g;
@@ -50,6 +52,26 @@ int main(void) {
 	}
 
 	/* Exporta para DOT */
+	dot_export(g);
+
+	/* Busca em largura (breadth-first search)*/
+	// bfsearch();
+
+	/* Busca em profundidade*/
+
+
+	libera_grafo(g);
+
+	return EXIT_SUCCESS;
+}
+
+/**
+ * @brief Exporta os dados em formato DOT
+ * @param g: grafo a ser exportado
+ */
+void dot_export(grafo_t *g)
+{
+	int i,j;
 	FILE *fp;
 	fp = fopen("graph.dot", "w");
 
@@ -62,18 +84,11 @@ int main(void) {
 	fprintf(fp, "graph {\n");	// Cria o cabeçalho do arquivo
 
 	for (i=0; i < VERTICES; i++){
-		for (j=0; j < VERTICES; j++)
+		for (j=i; j < VERTICES; j++)
 		if(adjacente(g, i, j))
 			fprintf(fp, "\t%d -- %d\n", i, j);
 	}
 
 	fprintf(fp, "}");
 	fclose(fp);
-
-	/* Busca em largura*/
-
-
-	libera_grafo(g);
-
-	return EXIT_SUCCESS;
 }
