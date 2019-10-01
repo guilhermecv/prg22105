@@ -1,0 +1,3 @@
+# export graph to png file
+echo "generating graph picture"
+dot -Tpng graph.dot > graph.png
