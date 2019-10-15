@@ -8,6 +8,8 @@
              : estruturas disponiveis:
              : pilha e fila
  ============================================================================
+ Modified on Oct 13, 2019
+ 	Guilherme Camargo Valese
  */
 
 #include <stdio.h>
@@ -16,6 +18,9 @@
 #include "pilha.h"
 #include "fila.h"
 #include "grafo.h"
+
+#define TEST_ON
+#define VERTICE_INICIAL		1
 
 int main(void) {
 
@@ -118,6 +123,15 @@ int main(void) {
 	}
 
 	exportar_grafo_dot("graph.dot", grafo);
+
+#ifdef TEST_ON
+	printf("\nIniciando teste de buscas\n-> Busca em largura\n");
+	bfs(grafo, VERTICE_INICIAL);
+	printf("\n-> Busca em profundidade\n");
+	dfs(grafo, VERTICE_INICIAL);
+#else
+	printf("\nHabilite a realizacao dos testes de buscas :)\n");
+#endif
 
 	libera_fila(fila);
 	libera_grafo(grafo);

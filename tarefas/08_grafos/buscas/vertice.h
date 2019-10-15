@@ -63,7 +63,7 @@ void vertice_set_pai(vertice_t *vertice, vertice_t *pai);
 int vertice_get_grupo(vertice_t *vertice);
 
 
-void vertice_set_distance(vertice_t *vertice, int distance)
+void vertice_set_distance(vertice_t *vertice, int distance);
 
 
 #endif /* GRAFO_VERTICE_H_ */

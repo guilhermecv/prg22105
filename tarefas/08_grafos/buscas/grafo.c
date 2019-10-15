@@ -3,6 +3,9 @@
  *
  *  Created on: Jul 5, 2016
  *      Author: Renan Augusto Starke
+ *
+ *	Modified on: Oct 13, 2019
+ *			Guilherme Camargo Valese
  */
 
 #include <stdio.h>
@@ -73,7 +76,7 @@ void bfs(grafo_t *grafo, vertice_t* inicial)
 		no_vert = obtem_proximo(no_vert);
 	}
 
-	// enqueue(void *dado, Q)
+	enqueue(vertice, Q);
 
 
 

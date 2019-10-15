@@ -20,11 +20,13 @@ TO-DO:
 #include <stdio.h>
 #include <stdlib.h>
 #include "grafo.h"
-
+#include "fila.h"
 
 #define VERTICES		5
+//#define DEBUG
 
 void dot_export(grafo_t *g);
+void bfsearch(grafo_t *g, int indice);
 
 int main(void) {
 	int i,j;
@@ -91,4 +93,29 @@ void dot_export(grafo_t *g)
 
 	fprintf(fp, "}");
 	fclose(fp);
+}
+
+/**
+ * @brief Busca em largura
+ * @param g: grafo para busca
+ * @param indice: índice inicial da busca
+ */
+void bfsearch(grafo_t *g, int indice)
+{
+	fila_t *fila = cria_fila();
+
+	if(fila == NULL)
+	{
+		fprintf(stderr, "bfsearch(): ponteiro nulo\n");
+		exit(EXIT_FAILURE);
+	}
+
+	// enqueue();
+
+	while(!fila_vazia(fila))
+	{
+		// u=dequeue(fila);
+	}
+
+
 }
