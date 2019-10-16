@@ -10,20 +10,16 @@
 #include <string.h>
 
 #include "grafo.h"
-#include "fila.h"
-
-#define DEBUG
 
 struct vertices {
 	int id;         /*!< Identificação numérica do vértice  */
-	int dist;
-	int pai;
+	
     /* Mais informações, se necessário */
 };
 
 struct arestas {
 	int adj;        /*!< Valor booleando. Verdadeiro representa uma adjacência entre dois vértices  */
-
+	
     /* Mais informações, se necessário */
 };
 
@@ -42,53 +38,21 @@ struct grafos{
   * @retval Nenhum. Dados são disponibilizados nos vértices
   */
 void bfs(grafo_t *grafo, int inicial){
-		int i;
-    fila_t *fila;
-		vertice_t *u;
-
-		fila = cria_fila();		// cria fila vazia
-
-#ifdef DEBUG
-		printf("\nInicializando vertices\n");
-#endif
-
-		for (i=0; i < grafo->n_vertices; i++)
-		{
-			grafo->vertices[i].dist = -1;
-			grafo->vertices[i].pai  = -1;
-		}
-
-		grafo->vertices[inicial].dist = 0;
-		enqueue(&grafo->vertices[inicial], fila);
-
-		while(!fila_vazia(fila))
-		{
-			u=dequeue(fila);
-
-			for (i=0; i < grafo->n_vertices; i++)
-			{
-				if(adjacente(grafo, i, u->id))
-				{
-					if(grafo->vertices[i].dist == -1)
-					{
-						grafo->vertices[i].dist = u->dist + 1;
-						grafo->vertices[i].pai = u->id;
-						enqueue(u,fila);
-					}
-				}
-			}
-
-		}
-
-#ifdef DEBUG
-	for (i=0; i < grafo->n_vertices; i++)
-	{
-		printf("\nvertice[%d].pai = %d vertice[%d].dist = %d\n", i, grafo->vertices[i].pai, i, grafo->vertices[i].dist);
-	}
-#endif
-
-		libera_fila(fila);
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
+
+
 
 
 /**
@@ -99,18 +63,18 @@ void bfs(grafo_t *grafo, int inicial){
   * @retval Nenhum. Dados são disponibilizados nos vértices
   */
 void dfs(grafo_t *grafo, int inicial){
-
-
-
-
-
-
-
-
-
-
-
-
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
 
 
@@ -247,32 +211,4 @@ int adjacente(grafo_t *g, int u, int v){
 		return FALSE;
 
 	return ((g->matriz_adj[u][v].adj));
-}
-
-/**
- * @brief Exporta os dados em formato DOT
- * @param g: grafo a ser exportado
- */
-void dot_export(const char *filename, grafo_t *g)
-{
-	int i,j;
-	FILE *fp;
-	fp = fopen(filename, "w");
-
-	if(fp == NULL)
-	{
-		perror("dot_export");
-		exit(EXIT_FAILURE);
-	}
-
-	fprintf(fp, "graph {\n");	// Cria o cabeçalho do arquivo
-
-	for (i=0; i < 20; i++){
-		for (j=i; j < 20; j++)
-		if(adjacente(g, i, j))
-			fprintf(fp, "\t%d -- %d\n", i, j);
-	}
-
-	fprintf(fp, "}");
-	fclose(fp);
 }

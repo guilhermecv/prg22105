@@ -7,7 +7,7 @@
 
 #define FALSO 0
 #define VERDADEIRO 1
-#define DEBUG
+//#define DEBUG
 
 struct filas {
 	lista_enc_t *dados;     /*!< Lista encadeada que contém os dados enfileirados */
@@ -118,4 +118,15 @@ int fila_vazia(fila_t *fila)
     }
 
     return lista_vazia(fila->dados);
+}
+
+
+//##########################
+/**
+ * @brief Imprime os dados contidos na fila
+ * @param fila: fila contendo os dados
+ */
+void imprime_fila(fila_t *fila)
+{
+	imprimi_lista(fila->dados);
 }

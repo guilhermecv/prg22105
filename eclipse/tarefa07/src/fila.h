@@ -12,4 +12,6 @@ void* dequeue(fila_t *fila);
 int fila_vazia(fila_t *fila);
 void libera_fila(fila_t* fila);
 
+void imprime_fila(fila_t *fila);
+
 #endif // FILA_H_INCLUDED

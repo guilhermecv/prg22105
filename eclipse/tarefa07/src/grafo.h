@@ -8,8 +8,11 @@
 #ifndef GRAFO_H_
 #define GRAFO_H_
 
-#define TRUE 1
-#define FALSE 0
+#define INFINITO INT_MAX
+
+#define TRUE	1
+#define FALSE	0
+
 
 typedef struct vertices vertice_t;
 typedef struct arestas aresta_t;
