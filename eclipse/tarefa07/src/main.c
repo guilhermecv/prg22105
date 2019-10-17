@@ -16,7 +16,6 @@
 #define VERTICE_INICIAL		0
 
 int main(void) {
-	int i,j;
 	grafo_t *g;
 
     /* Cria grafo com 20 vértices */
@@ -42,6 +41,7 @@ int main(void) {
 
 
 #ifdef IMPRIME_MATRIZ
+	int i,j;
 	/* Imprime matriz */
 	for (i=0; i < 20; i++){
 		for (j=0; j < 20; j++)
@@ -50,7 +50,9 @@ int main(void) {
 #endif
 
 	dot_export("graph.dot", g);
-	bfs(g, VERTICE_INICIAL);
+//	bfs(g, VERTICE_INICIAL);
+	dfs(g, VERTICE_INICIAL);
+
 	libera_grafo(g);
 
 

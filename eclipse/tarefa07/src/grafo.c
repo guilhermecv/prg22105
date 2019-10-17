@@ -13,6 +13,7 @@
 
 #include "grafo.h"
 #include "fila.h"
+#include "pilha.h"
 
 //############ OPCOES DE DEBUG ##############
 #define DEBUG
@@ -72,7 +73,7 @@ void bfs(grafo_t *grafo, int inicial) {
 	grafo->vertices[inicial].visitado = TRUE;
 	enqueue(&grafo->vertices[inicial], fila);	// Coloca o vertice na fila
 
-	while (!fila_vazia(fila)) {					// Enquanto a fila não está vazia
+	while (!fila_vazia(fila)) {				// Enquanto a fila não está vazia
 		u = dequeue(fila);						// Retira o vértice
 
 #ifdef DEBUG
@@ -89,15 +90,15 @@ void bfs(grafo_t *grafo, int inicial) {
 #ifdef DEBUG
 				printf("\nOs vertices %d e %d sao adjacentes\n", u->id, i);
 #endif
-				if (grafo->vertices[i].visitado == FALSE) {		// Se o vertice não foi visitado
-					grafo->vertices[i].visitado = TRUE;			// Marca como visitado
-					grafo->vertices[i].dist = u->dist + 1;		// encontrado novo nível
-					grafo->vertices[i].pai = u->id;				// Seta o pai como sendo o vertice anterior
+				if (grafo->vertices[i].visitado == FALSE) {	// Se o vertice não foi visitado
+					grafo->vertices[i].visitado = TRUE;	// Marca como visitado
+					grafo->vertices[i].dist = u->dist + 1;// encontrado novo nível
+					grafo->vertices[i].pai = u->id;	// Seta o pai como sendo o vertice anterior
 #ifdef DEBUG
 					printf("\nAdicionando vertice %d na fila",
 							grafo->vertices[i].id);
 #endif
-					enqueue(&grafo->vertices[i], fila);			// Adiciona na fila
+					enqueue(&grafo->vertices[i], fila);		// Adiciona na fila
 				}
 			}
 
@@ -105,7 +106,8 @@ void bfs(grafo_t *grafo, int inicial) {
 	}
 
 #ifdef PRINT_VERTICES
-	printf("\n\nBusca finalizada, exibindo informacoes dos vertices visitados:");
+	printf(
+			"\n\nBusca finalizada, exibindo informacoes dos vertices visitados:");
 	for (i = 0; i < grafo->n_vertices; i++) {
 		if (grafo->vertices[i].visitado) {
 			printf("\nv[%d].visitado = %d v[%d].pai = %d v[%d].dist = %d\n", i,
@@ -127,6 +129,62 @@ void bfs(grafo_t *grafo, int inicial) {
  * @retval Nenhum. Dados são disponibilizados nos vértices
  */
 void dfs(grafo_t *grafo, int inicial) {
+	int i;
+	vertice_t *u;
+	pilha_t *pilha;
+	pilha = cria_pilha();
+
+#ifdef DEBUG
+	printf("\nInicializando vertices\n");
+#endif
+
+	for (i = 0; i < grafo->n_vertices; i++) {
+		grafo->vertices[i].id = i;					// Atualiza o ID
+		grafo->vertices[i].visitado = FALSE;// Marca o vértice como não visitado
+	}
+
+	push(&grafo->vertices[inicial], pilha);
+
+	/*
+	 * Enquanto a fila não for vazia, retira um vertice
+	 */
+	while (!pilha_vazia(pilha)) {
+
+		// Retira o vértice inicial
+		u = pop(pilha);
+#ifdef DEBUG
+		printf("\nRetirando vertice %d da pilha\n", u->id);
+#endif
+
+		if (u->visitado == FALSE) {
+			u->visitado = TRUE;
+
+			for (i = 0; i < grafo->n_vertices; i++) {
+#ifdef DEBUG
+				printf("\nverificando vertice %d", i);
+#endif
+				if (adjacente(grafo, u->id, i)) {
+					grafo->vertices[i].pai = u->id;
+#ifdef DEBUG
+					printf("\nOs vertices %d e %d sao adjacentes\nAdicionando vertice %d na pilha\n", u->id, i, i);
+#endif
+					push(&grafo->vertices[i], pilha);
+				}
+			}
+		}
+	}
+
+#ifdef PRINT_VERTICES
+	printf("\n\nBusca finalizada, exibindo informacoes dos vertices");
+	for (i = 0; i < grafo->n_vertices; i++) {
+		printf("\nv[%d].visitado = %d v[%d].pai = %d v[%d].dist = %d\n", i,
+				grafo->vertices[i].visitado, i, grafo->vertices[i].pai, i,
+				grafo->vertices[i].dist);
+
+	}
+#endif
+
+	libera_pilha(pilha);
 
 }
 
