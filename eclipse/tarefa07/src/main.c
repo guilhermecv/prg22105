@@ -50,8 +50,8 @@ int main(void) {
 #endif
 
 	dot_export("graph.dot", g);
-//	bfs(g, VERTICE_INICIAL);
-	dfs(g, VERTICE_INICIAL);
+	bfs(g, VERTICE_INICIAL);
+	// dfs(g, VERTICE_INICIAL);
 
 	libera_grafo(g);
 

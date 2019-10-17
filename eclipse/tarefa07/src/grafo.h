@@ -8,8 +8,6 @@
 #ifndef GRAFO_H_
 #define GRAFO_H_
 
-#define INFINITO INT_MAX
-
 #define TRUE	1
 #define FALSE	0
 

@@ -64,7 +64,7 @@ void bfs(grafo_t *grafo, int inicial) {
 
 	for (i = 0; i < grafo->n_vertices; i++) {
 		grafo->vertices[i].id = i;				// Atualiza o índice do vértice
-		grafo->vertices[i].dist = INFINITO;		// INFINITO
+		grafo->vertices[i].dist = -1;		// INFINITO
 		grafo->vertices[i].pai = -1;			// NULL
 		grafo->vertices[i].visitado = FALSE;	// FALSE
 	}
@@ -109,7 +109,7 @@ void bfs(grafo_t *grafo, int inicial) {
 	printf(
 			"\n\nBusca finalizada, exibindo informacoes dos vertices visitados:");
 	for (i = 0; i < grafo->n_vertices; i++) {
-		if (grafo->vertices[i].visitado) {
+		if (grafo->vertices[i].visitado == 1) {
 			printf("\nv[%d].visitado = %d v[%d].pai = %d v[%d].dist = %d\n", i,
 					grafo->vertices[i].visitado, i, grafo->vertices[i].pai, i,
 					grafo->vertices[i].dist);
