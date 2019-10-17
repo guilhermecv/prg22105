@@ -103,6 +103,5 @@ no_t *remover_cauda(lista_enc_t *lista){
 
 
 int lista_vazia(lista_enc_t* lista){
-
-  
+  return lista->tamanho;
 }
