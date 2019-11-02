@@ -99,10 +99,11 @@ dado_t **ler_dados_csv(char *nome_do_arquivo, int *n_linhas){
 /**
  * @brief Libera a memória alocada para os dados
  * @param **vetor: vetor de ponteiros
+ * @param *total: ponteiro para a quantidade de dados lidos
  *
  * @retval: nenhum
  */
-void liberar_dados(dado_t **vetor)
+void liberar_dados(dado_t **vetor, int *total)
 {
 	if(vetor == NULL)
 	{
@@ -110,6 +111,11 @@ void liberar_dados(dado_t **vetor)
 		exit(-1);
 	}
 
-  
-	free(vetor);
+    int i;
+
+    for(i = 0; i < *total; i++)
+    {
+        free(vetor[i]);
+    }
+    free(vetor);
 }

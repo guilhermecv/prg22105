@@ -15,7 +15,7 @@
 #include <limits.h>
 
 // #define DEBUG
-#define ITERACOES     20
+#define ITERACOES     200000
 
 void bubble_sort(dado_t **dados, int *n);
 void swap(float *a , float *b);
@@ -56,9 +56,9 @@ int main()
       }
     }
 
-    liberar_dados(dados);
+    liberar_dados(dados, &n_linhas);
 
-    return 1;
+    return EXIT_SUCCESS;
 }
 
 
