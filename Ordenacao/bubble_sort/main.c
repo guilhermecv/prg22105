@@ -14,11 +14,12 @@
 #include <time.h>
 #include <limits.h>
 
-// #define DEBUG
-#define ITERACOES     200000
+#define DEBUG_ON
+#define ITERACOES     20
 
 void bubble_sort(dado_t **dados, int *n);
-void swap(float *a , float *b);
+void swap(dado_t **a , dado_t **b);
+
 
 int main()
 {
@@ -28,35 +29,32 @@ int main()
 
     int n_linhas = 0;
     int i;
-    dado_t **dados = ler_dados_csv("camera_temp.csv", &n_linhas);
+    total_time.tv_sec = 0;
+    total_time.tv_nsec = 0;
 
-    clock_gettime(CLOCK_MONOTONIC ,&t_1);
     for(i = 0; i < ITERACOES; i++)
     {
-        bubble_sort(dados, &n_linhas);
-    }
-    clock_gettime(CLOCK_MONOTONIC ,&t_2);
+      dado_t **dados = ler_dados_csv("camera_temp.csv", &n_linhas);
 
-#ifdef DEBUG
-    printf("\n\nt_1.s = %lu\nt_1.ns = %lu\nt_2.s = %lu\nt_2.ns = %lu\n", t_1.tv_sec, t_1.tv_nsec, t_2.tv_sec, t_2.tv_nsec);
-#endif
+      clock_gettime(CLOCK_MONOTONIC ,&t_1);
+      bubble_sort(dados, &n_linhas);
+      clock_gettime(CLOCK_MONOTONIC ,&t_2);
 
-    total_time.tv_sec = t_2.tv_sec - t_1.tv_sec;
-    total_time.tv_nsec = t_2.tv_nsec - t_1.tv_nsec;
+      total_time.tv_sec += (t_2.tv_sec - t_1.tv_sec);
+      total_time.tv_nsec += (t_2.tv_nsec - t_1.tv_nsec);
 
-    printf("\nTeste finalizado com %d iteracoes\n\n\tTempo de execucao: \n\t%lu s \n\t%lu ns\n\nDeseja exibir os dados novamente (s/n)?", i, total_time.tv_sec, total_time.tv_nsec);
-
-    char option = getchar();
-
-    if(option == 's' || option == 'S')
-    {
-      for(i = 0; i < n_linhas; i++)
+      #ifdef DEBUG_ON
+      int n;
+      for(n = 0; n < n_linhas; n++)
       {
-        printf("ID: %d, %f, %s\n", dados[i]->amostra, dados[i]->temperatura, dados[i]->tempo);
+        printf("ID: %d, %f, %s\n", dados[n]->amostra, dados[n]->temperatura, dados[n]->tempo);
       }
+      #endif
+
+      liberar_dados(dados, &n_linhas);
     }
 
-    liberar_dados(dados, &n_linhas);
+    printf("\nTeste finalizado com %d iteracoes\n\n\tTempo de execucao: \n\t%lu s \n\t%lu ns\n\n", i, total_time.tv_sec, total_time.tv_nsec);
 
     return EXIT_SUCCESS;
 }
@@ -82,7 +80,7 @@ void bubble_sort(dado_t **dados, int *n)
         {
             if(dados[j]->temperatura > dados[j+1]->temperatura)
             {
-                swap(&dados[j]->temperatura, &dados[j+1]->temperatura);
+                swap(&dados[j], &dados[j+1]);
             }
         }
     }
@@ -93,9 +91,9 @@ void bubble_sort(dado_t **dados, int *n)
  * @param a: ponteiro para o primeiro elemento
  * @param b: ponteiro para o segundo elemento
  */
-void swap(float *a , float *b)
+void swap(dado_t **a , dado_t **b)
 {
-    float temp;
+    dado_t *temp;
     temp = *a;
     *a = *b;
     *b = temp;

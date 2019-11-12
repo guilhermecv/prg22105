@@ -1,5 +1,6 @@
 CC = gcc
 CFLAGS = -Wall
+OPT = -O3
 
 # Incluir aqui as bibliotecas utilizadas
 # LDFLAGS = -l wiringPi
@@ -19,7 +20,7 @@ $(EXEC): $(OBJS)
 	@echo ' '
 
 %.o: %.c
-	@$(CC) -c $(CFLAGS) $^
+	@$(CC) $(OPT) $(CFLAGS) -c $^
 
 clean:
 	@rm -rf *.o $(EXEC)
