@@ -1,16 +1,11 @@
-/**
- *
- */
-
 #ifndef QUICKSORT_H
 #define QUICKSORT_H
 
 #include <stdio.h>
-#include <stdlib.h>
 
-void quick_sort(int *vetor, int esq, int dir);
-int particionar(int *vetor, int esq, int dir);
-int mediana(int *vetor, int esq, int dir);
-
+int mediana(int **vetor, int esq, int dir);
+int particiona(int **vetor, int esq, int dir);
+void quicksort(int **vetor, int inicio, int fim);
+void swap(int **vetor, int a, int b);
 
 #endif /* QUICKSORT_H */
