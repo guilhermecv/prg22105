@@ -3,7 +3,7 @@
  *
  * @author Guilherme Camargo Valese
  *
- * Ordenacao por troca com vetor alocado dinamicamente
+ * Ordenacao por troca com vetor de inteiros alocados dinamicamente
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -27,7 +27,7 @@ int main()
 	exibir_dados(vetor);
 	liberar_dados(vetor);
 
-	printf("\nTeste finalizado com %d iteracoes\nTempo medio de execucao\n\t s\n\t ns", i);
+	printf("\nTeste finalizado com %d iteracoes\nTempo medio de execucao\n\t s\n\t ns\n", i);
 
 	return EXIT_SUCCESS;
 }

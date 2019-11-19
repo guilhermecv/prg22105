@@ -5,6 +5,9 @@
  */
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
+#include <unistd.h>        
+
 #include "dados.h"
 
 #define DEBUG
@@ -18,7 +21,7 @@ int * novo_dado(void)
 {
 	int *dado;
 	dado = malloc(sizeof(int));
-	*dado = 0;
+	*dado = rand();
 
 	return dado;
 }
@@ -33,6 +36,8 @@ int** criar_dados(void)
 {
 	int** dados;
 	int i;
+
+	srand(getpid() ^ time(NULL));
 
 #ifdef DEBUG
 	printf("\nAlocando dados... ");
@@ -70,9 +75,9 @@ void liberar_dados(int **dados)
 	int i;
 	for(i = 0; i < TAMANHO_VETOR; i++)
 	{
-//		free(dados[i]);
+		// free(dados[i]);
 	}
-//	free(dados);
+	free(dados);
 
 #ifdef DEBUG
 	printf("OK!\n");

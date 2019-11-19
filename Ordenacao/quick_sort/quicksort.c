@@ -5,7 +5,7 @@
  */
 #include "quicksort.h"
 
-#define DEBUG
+// #define DEBUG
 
 /**
  * @brief Mediana de tres
