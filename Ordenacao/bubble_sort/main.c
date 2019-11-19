@@ -54,7 +54,7 @@ int main()
       liberar_dados(dados, &n_linhas);
     }
 
-    printf("\nTeste finalizado com %d iteracoes\n\n\tTempo de execucao: \n\t%lu s \n\t%lu ns\n\n", i, total_time.tv_sec, total_time.tv_nsec);
+    printf("\nTeste finalizado com %d iteracoes\n\n\tTempo de execucao: \n\t%lu s \n\t%lu ns\n\n", i, total_time.tv_sec/ITERACOES, total_time.tv_nsec/ITERACOES);
 
     return EXIT_SUCCESS;
 }
