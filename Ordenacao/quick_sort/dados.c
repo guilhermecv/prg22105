@@ -1,101 +1,121 @@
-/**
- * @file dados.c
- *
- * @author Guilherme Camargo Valese
- */
+
+/* leitura de um arquivo CSV conforme o padrão:
+  *         Series;Value;Time
+  *         <int>;<float>;<string>
+  *         <int>;<float>;<string> */
+
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
-#include <unistd.h>        
+#include <string.h>
 
 #include "dados.h"
 
-#define DEBUG
+
 
 /**
- * @brief gera um numero aleatorio
- *
- * @retval int: ponteiro para novo dado
- */
-int * novo_dado(void)
-{
-	int *dado;
-	dado = malloc(sizeof(int));
-	*dado = rand();
+  * @brief  Cria um novo dado
+  * @param  amostra: identificador da amostra
+  * @param  temperatura: valor da temperatura
+  * @param  timestamp: data e hora da amostra
+  *
+  * @retval dado_t: ponteiro para uma novo dado
+  */
+dado_t * criar_dado (int amostra, float temperatura, char * timestamp){
 
-	return dado;
+    dado_t * meu_novo_dado = malloc(sizeof(struct dados));
+
+    meu_novo_dado->amostra = amostra;
+    meu_novo_dado->temperatura = temperatura;
+    strcpy(meu_novo_dado->tempo, timestamp);
+
+    return meu_novo_dado;
 }
 
 
 /**
- * @brief Cria um vetor de numeros aleatorios alocados dinamicamente
+ * @brief Lê os dados de um arquivo CSV
+ * @param nome_do_arquivo: nome do arquivo CSV
+ * @param n_linhas: total de linhas no arquivo
  *
- * @retval int**: vetor de ponteiros
+ * @retval dados: vetor de ponteiros de dados
  */
-int** criar_dados(void)
-{
-	int** dados;
-	int i;
+dado_t **ler_dados_csv(char *nome_do_arquivo, int *n_linhas){
+    char texto[64];
+    int i=0;
+    /* Demais Variáveis */
+    int amostra;
+    float temperatura;
+    char data[64];
+    int n_linhas_temp = 0;
 
-	srand(getpid() ^ time(NULL));
+    dado_t **dados;
 
-#ifdef DEBUG
-	printf("\nAlocando dados... ");
+    FILE *fp = fopen(nome_do_arquivo,"r");
+
+    if (!fp){
+        perror("ler_dados_csv");
+        exit(-1);
+    }
+
+    /* Ignora primeira linha */
+    fgets(texto,64, fp);
+
+    while(fgets(texto,64, fp) != NULL) // fgets retorna NULL!
+    {
+#ifdef DEBUG_ON
+    	printf("\n %s", texto);
+#endif
+    	n_linhas_temp++;
+    }
+
+#ifdef DEBUG_ON
+    printf("\nTotal de linhas: %d\n", n_linhas_temp);
 #endif
 
-	dados = malloc(sizeof(int) * TAMANHO_VETOR);
 
-	for(i = 0; i < TAMANHO_VETOR; i++)
-	{
-		dados[i] = novo_dado();
-	}
+    /* Aloque memória:
+     * Agora é um vetor de ponteiros */
+    dados = malloc(sizeof(struct dado *) * n_linhas_temp);
 
-	dados[0] = novo_dado();
+    rewind(fp);	// Volta para o início do arquivo
 
-#ifdef DEBUG
-	printf("OK!\n");
-#endif
+    fgets(texto,64, fp); /* Ignora a primeira linha */
 
-	return dados;
+    while (fscanf (fp, "%d,%f,%63[^\n]", &amostra, &temperatura, data) == 3){
+        // printf("Lido %d, %f, %s\n", amostra, temperatura, data);
+
+        /* Cria um novo dado abstrato e armazena a sua referência */
+        dados[i] = criar_dado(amostra, temperatura, data);
+        i++;
+    }
+
+    *n_linhas = n_linhas_temp;	// Atualiza a quantidade de linhas
+
+    fclose(fp);
+
+    return dados;
 }
 
-
 /**
- * @brief Libera a memoria alocada para os dados
- * @param **dados: vetor de ponteiros
- *
- * @retval nenhum
- */
-void liberar_dados(int **dados)
-{
-#ifdef DEBUG
-	printf("Liberando dados... ");
-#endif
-
-	int i;
-	for(i = 0; i < TAMANHO_VETOR; i++)
-	{
-		// free(dados[i]);
-	}
-	free(dados);
-
-#ifdef DEBUG
-	printf("OK!\n");
-#endif
-}
-
-/**
- * @brief Exibe os dados contidos no vetor
+ * @brief Libera a memória alocada para os dados
  * @param **vetor: vetor de ponteiros
+ * @param *total: ponteiro para a quantidade de dados lidos
  *
- * @retval nenhum
+ * @retval: nenhum
  */
-void exibir_dados(int **vetor)
+void liberar_dados(dado_t **vetor, int *total)
 {
-	int i;
-	for(i = 0; i < TAMANHO_VETOR; i++)
+	if(vetor == NULL)
 	{
-		printf("\n%d", *(vetor[i]));
+		fprintf(stderr, "\nliberar_dados: vetor nulo");
+		exit(-1);
 	}
-	printf("\n\n");
+
+    int i;
+
+    for(i = 0; i < *total; i++)
+    {
+        free(vetor[i]);
+    }
+    free(vetor);
 }
