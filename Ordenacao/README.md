@@ -1,6 +1,6 @@
 # Algoritmos de Ordenação
 
-Principais algoritmos de ordenação vistos durante o semestre. A pasta [comparativo](github.com/guilhermecv/prog2/Ordenacao/comparativo) contém um teste de comparação entre todos os algoritmos.
+Principais algoritmos de ordenação vistos durante o semestre. A pasta [comparativo](/comparativo) contém um teste de comparação entre todos os algoritmos.
 
 ```bash
 $ cd comparativo
