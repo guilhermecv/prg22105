@@ -6,7 +6,7 @@
 #include "insertion_sort.h"
 
 /**
- * @brief
+ * @brief Ordenação por inserção
  * @param **dados: vetor de ponteiros
  * @param *n: ponteiro para a quantidade total de dados
  */
