@@ -1,18 +1,22 @@
 # Algoritmos de Ordenação
 
-**Bubble Sort**
+Principais algoritmos de ordenação vistos durante o semestre. A pasta [comparativo](github.com/guilhermecv/prog2/Ordenacao/comparativo) contém um teste de comparação entre todos os algoritmos.
 
-Complexidade: **O(n²)**
+```bash
+$ cd comparativo
+$ make
+$ ./main
+```
 
+## Complexidade
 
-
-**Quick Sort**
-
-Complexidade
-
-​	Pior caso: **O(n²)**
-
-​	Caso médio: **O(n log n)**
-
-​	Melhor médio: **O(n log n)**
+| Algoritmo               | Complexidade | Tipo |
+| ----------------------- | ------------ | ---- |
+| Bubble Sort             | O(n²)        |      |
+| Quick  Sort             | O(n log n)   |      |
+| Insertion Sort Direto   |              |      |
+| Insertion Sort Binário  |              |      |
+| Merge Sort              |              |      |
+| Selection Sort          |              |      |
+| Heap Sort               |              |      |
 
