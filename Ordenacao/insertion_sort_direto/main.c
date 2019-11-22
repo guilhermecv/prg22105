@@ -13,29 +13,25 @@
 #include "dados.h"
 #include "insertion_sort.h"
 
-#define DEBUG_ON
+// #define DEBUG_ON
 #define ITERACOES     20
+#define SCALE         1000000   // Altere para 1000 para exibir o tempo em ms
 
 int main()
 {
-    struct timespec t_1, t_2;
-    struct timespec total_time;
-
+    printf("\nIniciando teste...\n");
+    clock_t time, total_time;
     int n_linhas = 0;
     int i;
-    total_time.tv_sec = 0;
-    total_time.tv_nsec = 0;
+    total_time = 0.0;
 
     for(i = 0; i < ITERACOES; i++)
     {
       dado_t **dados = ler_dados_csv("camera_temp.csv", &n_linhas);
 
-      clock_gettime(CLOCK_MONOTONIC ,&t_1);
+      time = clock();
       insertion_sort(dados, &n_linhas);
-      clock_gettime(CLOCK_MONOTONIC ,&t_2);
-
-      total_time.tv_sec += (t_2.tv_sec - t_1.tv_sec);
-      total_time.tv_nsec += (t_2.tv_nsec - t_1.tv_nsec);
+      total_time += clock() - time;
 
       #ifdef DEBUG_ON
       int n;
@@ -48,7 +44,13 @@ int main()
       liberar_dados(dados, &n_linhas);
     }
 
-    printf("\nTeste finalizado com %d iteracoes\n\n\tTempo medio de execucao: \n\t%lu s \n\t%lu ns\n\n", i, total_time.tv_sec/ITERACOES, total_time.tv_nsec/ITERACOES);
+#if SCALE == 1000
+    printf("\nTeste finalizado com %d iteracoes\nTempo medio de execucao: \n\t%lf ms\n", i, ( ((double) total_time) / ((CLOCKS_PER_SEC/SCALE))) / ITERACOES);
+#elif SCALE == 1000000
+    printf("\nTeste finalizado com %d iteracoes\nTempo medio de execucao: \n\t%lf us\n", i, ( ((double) total_time) / ((CLOCKS_PER_SEC/SCALE))) / ITERACOES);
+#else
+    printf("\nTeste finalizado com %d iteracoes\nTempo medio de execucao: \n\t%lf s\n", i, ( ((double) total_time) / (CLOCKS_PER_SEC)) / ITERACOES);
+#endif
 
     return EXIT_SUCCESS;
 }

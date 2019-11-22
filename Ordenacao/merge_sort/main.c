@@ -3,14 +3,15 @@
  *
  * @author Guilherme Camargo Valese
  *
- * Ordenacao por troca
+ * @description Algoritmo de Ordenação por Inserção Binario
  */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <limits.h>
 #include "dados.h"
-#include "quick_sort.h"
+#include "merge_sort.h"
 
 // #define DEBUG_ON
 #define ITERACOES     20
@@ -29,7 +30,7 @@ int main()
       dado_t **dados = ler_dados_csv("camera_temp.csv", &n_linhas);
 
       time = clock();
-      quick_sort(dados, 0, n_linhas-1);
+      merge_sort(dados, 0, n_linhas-1, &n_linhas);
       total_time += clock() - time;
 
       #ifdef DEBUG_ON
