@@ -6,7 +6,7 @@
 #include "merge_sort.h"
 
 /**
- * @brief Ordenação por mistura
+ * @brief 
  * @param **dados: vetor de ponteiros
  * @param esq: elemento a esqueda
  * @param dir: elemento a direita
@@ -24,12 +24,11 @@ void merge_sort(dado_t **dados, int esq, int dir, int *n_linhas)
 }
 
 /**
- * @brief Copia os dados do vetor auxiliar para o principal
+ * @brief 
  * @param **dados: vetor de ponteiros
  * @param esq: elemento a esqueda
  * @param med: elemento do meio
  * @param dir: elemento a direita
- * @param *n_linhas: ponteiro para o número total de linhas
  */
 void funde(dado_t **dados, int esq, int med, int dir, int *n_linhas)
 {
@@ -40,7 +39,6 @@ void funde(dado_t **dados, int esq, int med, int dir, int *n_linhas)
     dado_t **temp;
 
     temp = malloc(sizeof(struct dado *) * (*n_linhas));
-
     while(j <= med && k <= dir)
     {
         if(dados[j]->temperatura < dados[k]->temperatura)

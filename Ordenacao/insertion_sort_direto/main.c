@@ -13,9 +13,9 @@
 #include "dados.h"
 #include "insertion_sort.h"
 
-// #define DEBUG_ON
+#define DEBUG_ON
 #define ITERACOES     20
-#define SCALE         1000000   // Altere para 1000 para exibir o tempo em ms
+#define SCALE         1000   // Altere para 1000 para exibir o tempo em ms
 
 int main()
 {

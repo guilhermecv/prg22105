@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -Wall
-OPT = -O3
+OPT = -O2
 
 # Incluir aqui as bibliotecas utilizadas
 # LDFLAGS = -l wiringPi
