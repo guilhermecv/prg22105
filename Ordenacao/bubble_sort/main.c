@@ -15,9 +15,9 @@
 #include "dados.h"
 #include "bubble_sort.h"
 
-// #define DEBUG_ON
+//#define DEBUG_ON
 #define ITERACOES     20
-#define SCALE         1000000   // Altere para 1000 para exibir o tempo em ms
+#define SCALE         1000   // Altere para 1000 para exibir o tempo em ms
 
 int main()
 {
@@ -32,7 +32,7 @@ int main()
       dado_t **dados = ler_dados_csv("camera_temp.csv", &n_linhas);
 
       time = clock();
-      bubble_sort(dados, &n_linhas);
+      bubble_sort(dados, n_linhas);
       total_time += clock() - time;
 
       #ifdef DEBUG_ON

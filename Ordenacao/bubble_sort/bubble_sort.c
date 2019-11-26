@@ -11,7 +11,7 @@
  * @param **dados: vetor de ponteiros
  * @param n: quantidade total de elementos
  */
-void bubble_sort(dado_t **dados, int *n)
+void bubble_sort(dado_t **dados, int n)
 {
     if(dados == NULL)
     {
@@ -20,7 +20,7 @@ void bubble_sort(dado_t **dados, int *n)
     }
 
     int i,j;
-    for (i = *n; i > 1; i--)
+    for (i = n; i > 1; i--)
     {
         for(j = 0; j < i - 1; j++)
         {

@@ -12,11 +12,11 @@
  * @param **dados: vetor de ponteiros
  * @param *n: ponteiro para a quantidade total de dados
  */
-void insertion_sort(dado_t **dados, int *n)
+void insertion_sort(dado_t **dados, int n)
 {
     int i, j, med, esq, dir;
     float temp;
-    for(i = 0; i < *n; i++)
+    for(i = 0; i < n; i++)
     {
         temp = dados[i]->temperatura;
         esq = 0;

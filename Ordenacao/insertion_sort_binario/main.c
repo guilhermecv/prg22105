@@ -30,7 +30,7 @@ int main()
       dado_t **dados = ler_dados_csv("camera_temp.csv", &n_linhas);
 
       time = clock();
-      insertion_sort(dados, &n_linhas);
+      insertion_sort(dados, n_linhas);
       total_time += clock() - time;
 
       #ifdef DEBUG_ON
