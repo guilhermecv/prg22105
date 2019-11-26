@@ -10,18 +10,18 @@
  * @param *n_linhas: ponteiro para a quantidade total de dados
  * @return nenhum, os dados são ordenados internamente
  */
-void selection_sort(dado_t **dados, int *n_linhas)
+void selection_sort(dado_t **dados, int n_linhas)
 {
     int i;
     int j;
 
-    for (i = *n_linhas; i > 1; i--)
+    for (i = n_linhas; i > 1; i--)
     {
         int temp = 0;
 
         for (j = 1; j < i; j++)
         {
-#ifdef ORDEM_CRESCENTE    
+#ifdef ORDEM_CRESCENTE
             if(dados[j]->temperatura > dados[temp]->temperatura)
                 temp = j;
 #else

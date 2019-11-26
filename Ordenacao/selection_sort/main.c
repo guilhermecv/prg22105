@@ -4,7 +4,7 @@
  * @author Guilherme Camargo Valese
  *
  * Ordenacao por seleção, neste algoritmo o maior (ou menor) elemento não ordenado é trocado com o final.
- * Pode-se ordernar por ordem crescente ou descrescente, definindo o parâmetro de busca no 
+ * Pode-se ordernar por ordem crescente ou descrescente, definindo o parâmetro de busca no
  * arquivo "selection_sort.h"
  */
 
@@ -21,11 +21,11 @@
 /* Quantidade de iterações executadas com o algoritmo */
 #define ITERACOES     20
 
-/* Escala de exibição do tempo total 
+/* Escala de exibição do tempo total
    1000 (ms)
    1000000 (us)
  */
-#define SCALE         1000   
+#define SCALE         1000
 
 
 int main()
@@ -41,7 +41,7 @@ int main()
       dado_t **dados = ler_dados_csv("camera_temp.csv", &n_linhas);
 
       time = clock();
-      selection_sort(dados, &n_linhas);
+      selection_sort(dados, n_linhas);
       total_time += clock() - time;
 
       #ifdef DEBUG_ON
